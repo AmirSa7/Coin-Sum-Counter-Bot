@@ -86,7 +86,7 @@ def get_token_from_txt_file(token_txt_file: str) -> str:
 def main():
     """Start the bot."""
 
-    token = get_token_from_txt_file('../CoinCounterBotToken.txt')
+    token = get_token_from_txt_file('../CoinSumCounterBotToken.txt')
 
     # Create the Updater and pass it your bot's token.
     # Make sure to set use_context=True to use the new context based callbacks
