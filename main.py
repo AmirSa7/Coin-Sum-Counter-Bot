@@ -24,6 +24,7 @@ from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, Callb
 from telegram.files import file
 
 import time
+import cv2
 
 # Enable logging
 logging.basicConfig(
@@ -50,6 +51,13 @@ def echo(update: Update, context: CallbackContext) -> None:
     update.message.reply_text(update.message.text)
 
 
+def count_coins_in_recieved_image(update: Update, context: CallbackContext) -> None:
+    """Perform all the proccessing and return a value"""
+    download_recieved_image(update, context)
+
+    print('Coins were counted.')
+
+
 def download_recieved_image(update: Update, context: CallbackContext) -> None:
     """Download the last image recieved by the user."""
     # file_id = update.message.photo[-1].file_id
@@ -60,13 +68,15 @@ def download_recieved_image(update: Update, context: CallbackContext) -> None:
 
 
 def produce_img_name(update: Update) -> str:
-    folder = 'recieved_images/'
+    folder = 'Bot-Operation/recieved-images/'
     userID =  str(update.message.from_user.id)
     currTime = str(time.time())
     fileExtension = '.jpg'
     delim = '-'
+    fixedName = 'last_image'
 
-    imgName = folder + userID + delim + currTime + fileExtension
+    # imgName = folder + userID + delim + currTime + fileExtension
+    imgName = folder + fixedName + fileExtension
     return imgName
     
 
@@ -102,7 +112,7 @@ def main():
 
     # on noncommand i.e message - echo the message on Telegram
     dispatcher.add_handler(MessageHandler(Filters.text & ~Filters.command, echo))
-    dispatcher.add_handler(MessageHandler(Filters.photo, download_recieved_image))
+    dispatcher.add_handler(MessageHandler(Filters.photo, count_coins_in_recieved_image))
 
     # Start the Bot
     updater.start_polling()

@@ -15,3 +15,6 @@ Simple and effective coin segmentation using Python and OpenCV: https://blog.chr
 OpenCV-Python image segmentation and Watershed algorithm: https://www.programmersought.com/article/92784407251/
 
 
+detectron2: https://towardsdatascience.com/object-detection-in-6-steps-using-detectron2-705b92575578
+
+
