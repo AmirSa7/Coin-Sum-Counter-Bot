@@ -26,6 +26,12 @@ from telegram.files import file
 import time
 import cv2
 
+from Utils import utils
+
+import numpy as np
+from io import BytesIO
+import json
+
 # Enable logging
 logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO
@@ -49,18 +55,58 @@ def help_command(update: Update, context: CallbackContext) -> None:
 def echo(update: Update, context: CallbackContext) -> None:
     """Echo the user message."""
     update.message.reply_text(update.message.text)
+    
 
 
 def count_coins_in_recieved_image(update: Update, context: CallbackContext) -> None:
     """Perform all the proccessing and return a value"""
-    download_recieved_image(update, context)
 
-    print('Coins were counted.')
+    img = get_last_recieved_photo_as_ndarray(update)
+    proccessedImg, coinSum = proccess_image(img)
+    send_ndarray_image_to_user(update, context, proccessedImg)
+    replyString = 'The sum of the coins is: {}'.format(coinSum)
+    update.message.reply_text(replyString)
+
+    print(replyString)
+
+
+def proccess_image(img: np.ndarray) -> (np.ndarray, int):
+    """<fix>"""
+    proccessedImg = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY) # for testing
+    coinSum = -100 # TODO: apply right value
+
+    return (proccessedImg, coinSum)
+
+
+def send_ndarray_image_to_user(update: Update, context: CallbackContext, img: np.ndarray):
+    chat_id = update.message.chat_id
+
+    is_success, buffer = cv2.imencode(".jpg", img)
+    io_buf = BytesIO(buffer)
+    io_buf.seek(0)
+
+    context.bot.send_photo(chat_id, photo=io_buf)
+    io_buf.close()
+
+
+
+def get_TelegramFile_as_ndarray(telegramFile) -> np.ndarray:
+    io_buf = BytesIO()
+    telegramFile.download(out=io_buf)
+    io_buf.seek(0)
+    ndarray = cv2.imdecode(np.frombuffer(io_buf.getbuffer(), np.uint8), -1)
+    io_buf.close()
+    return ndarray
+
+
+def get_last_recieved_photo_as_ndarray(update: Update) -> np.ndarray:
+    telegramFile = update.message.photo[-1].get_file()
+    ndarray = get_TelegramFile_as_ndarray(telegramFile)
+    return ndarray
 
 
 def download_recieved_image(update: Update, context: CallbackContext) -> None:
     """Download the last image recieved by the user."""
-    # file_id = update.message.photo[-1].file_id
     newFile = update.message.photo[-1].get_file()
     newFileName = produce_img_name(update)
     newFile.download(newFileName)
@@ -68,15 +114,14 @@ def download_recieved_image(update: Update, context: CallbackContext) -> None:
 
 
 def produce_img_name(update: Update) -> str:
-    folder = 'Bot-Operation/recieved-images/'
+    folder = 'Bot-Operation/Recieved-Images/'
     userID =  str(update.message.from_user.id)
     currTime = str(time.time())
     fileExtension = '.jpg'
     delim = '-'
     fixedName = 'last_image'
 
-    # imgName = folder + userID + delim + currTime + fileExtension
-    imgName = folder + fixedName + fileExtension
+    imgName = folder + userID + delim + currTime + fileExtension
     return imgName
     
 
