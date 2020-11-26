@@ -3,7 +3,9 @@
 This project is a Telegram bot service. The user sends to the bot a picture of a collection of coins scattered on a table. The bot responds the amount of money in the picture.
 This project is currently in development.
 
-## Informative sources
+## References
+### Bot API
+- Python Telegram Bot: [GitHub](https://github.com/python-telegram-bot/python-telegram-bot)
 ### The deep recognition (detection / segmentation) was implemted based on the following examples
 Detectron2:
 - Torchvision object detection finetune tutorial: [Pytorch](https://pytorch.org/tutorials/intermediate/torchvision_tutorial.html)

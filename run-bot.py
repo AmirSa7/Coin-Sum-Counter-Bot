@@ -32,6 +32,8 @@ import numpy as np
 from io import BytesIO
 import json
 
+import recognition.processing.process_image as pi
+
 # Enable logging
 logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO
@@ -61,21 +63,16 @@ def echo(update: Update, context: CallbackContext) -> None:
 def count_coins_in_recieved_image(update: Update, context: CallbackContext) -> None:
     """Perform all the proccessing and return a value"""
 
+    # download_recieved_image(update, context)
+
     img = get_last_recieved_photo_as_ndarray(update)
-    proccessedImg, coinSum = proccess_image(img)
+    proccessedImg, coinSum = pi.process_image(img)
     send_ndarray_image_to_user(update, context, proccessedImg)
     replyString = 'The sum of the coins is: {}'.format(coinSum)
     update.message.reply_text(replyString)
 
     print(replyString)
 
-
-def proccess_image(img: np.ndarray) -> (np.ndarray, int):
-    """<fix>"""
-    proccessedImg = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY) # for testing
-    coinSum = -100 # TODO: apply right value
-
-    return (proccessedImg, coinSum)
 
 
 def send_ndarray_image_to_user(update: Update, context: CallbackContext, img: np.ndarray):
