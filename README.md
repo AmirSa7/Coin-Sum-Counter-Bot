@@ -5,11 +5,11 @@ This project is currently in development.
 
 This bot can run on AWS:
 
-<img src="https://github.com/AmirSa7/Drone-Tracking-Gimbal-Control/blob/main/Report/Report%20images/the_system_ver02.png" width="900"></a>
+<img src="https://github.com/AmirSa7/Coin-Sum-Counter-Bot/blob/main/Figures/System-Block-Diagram-AWS.jpg" width="700"></a>
 
 or efficiently on a local Nvidia Jetson:
 
-<img src="https://github.com/AmirSa7/Drone-Tracking-Gimbal-Control/blob/main/Report/Report%20images/the_system_ver02.png" width="900"></a>
+<img src="https://github.com/AmirSa7/Coin-Sum-Counter-Bot/blob/main/Figures/System-Block-Diagram-Jetson.jpg" width="700"></a>
 
 ## References
 ### Bot API
