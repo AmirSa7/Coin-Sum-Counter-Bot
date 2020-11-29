@@ -3,6 +3,14 @@
 This project is a Telegram bot service. The user sends to the bot a picture of a collection of coins scattered on a table. The bot responds the amount of money in the picture.
 This project is currently in development.
 
+This bot can run on AWS:
+
+<img src="https://github.com/AmirSa7/Drone-Tracking-Gimbal-Control/blob/main/Report/Report%20images/the_system_ver02.png" width="900"></a>
+
+or efficiently on a local Nvidia Jetson:
+
+<img src="https://github.com/AmirSa7/Drone-Tracking-Gimbal-Control/blob/main/Report/Report%20images/the_system_ver02.png" width="900"></a>
+
 ## References
 ### Bot API
 - Python Telegram Bot: [GitHub](https://github.com/python-telegram-bot/python-telegram-bot)
