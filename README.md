@@ -5,11 +5,11 @@ This project is currently in development.
 
 This bot can run on AWS:
 
-<img src="https://github.com/AmirSa7/Coin-Sum-Counter-Bot/blob/main/Figures/System-Block-Diagram-AWS.jpg" width="500"></a>
+<img src="https://github.com/AmirSa7/Coin-Sum-Counter-Bot/blob/main/Misc/Figures/System-Block-Diagram-AWS.jpg" width="500"></a>
 
 or efficiently on a local Nvidia Jetson:
 
-<img src="https://github.com/AmirSa7/Coin-Sum-Counter-Bot/blob/main/Figures/System-Block-Diagram-Jetson.jpg" width="500"></a>
+<img src="https://github.com/AmirSa7/Coin-Sum-Counter-Bot/blob/main/Misc/Figures/System-Block-Diagram-Jetson.jpg" width="500"></a>
 
 ## References
 ### Bot API
