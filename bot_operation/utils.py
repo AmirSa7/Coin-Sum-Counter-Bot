@@ -13,12 +13,11 @@ import cv2
 import numpy as np
 from io import BytesIO
 
-import recognition.processing.process_image as pi
 import client
 import time
 
 
-### Operation Functions ###
+### ------ Operation Functions ------ ###
 
 
 def count_coins_in_recieved_image(update: Update, context: CallbackContext) -> None:
@@ -29,7 +28,6 @@ def count_coins_in_recieved_image(update: Update, context: CallbackContext) -> N
     img = get_last_recieved_photo_as_ndarray(update)
 
     proccessedImg, coinSum = client.send_image_to_flask_server(img)
-    # proccessedImg, coinSum = pi.process_image(img)
 
     send_ndarray_image_to_user(update, context, proccessedImg)
     replyString = 'The sum of the coins is: {}'.format(coinSum)
@@ -88,7 +86,7 @@ def download_recieved_image(update: Update, context: CallbackContext) -> None:
     print('Image was successfully downloaded and saved.')
 
 
-### Reading Functions ###
+### ------ Reading Functions ------ ###
     
 
 def read_txt_file_to_string(txt_file: str) -> str:
@@ -103,8 +101,7 @@ def get_token_from_txt_file(token_txt_file: str) -> str:
     return token_string
 
 
-### Generative Functions ###
-
+### ------ Generative Functions ------ ###
 
 def produce_img_name(update: Update) -> str:
     folder = './'
